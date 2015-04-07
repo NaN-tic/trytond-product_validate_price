@@ -1,0 +1,7 @@
+# 
+msgid ""
+msgstr "Content-Type: text/plain; charset=utf-8\n"
+
+msgctxt "error:product.template:"
+msgid "You can not set the list price lesser than the cost price."
+msgstr "No puede establecer el precio de venta menor que el precio de coste."
