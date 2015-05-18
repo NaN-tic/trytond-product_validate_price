@@ -14,8 +14,9 @@ class Template:
     def __setup__(cls):
         super(Template, cls).__setup__()
         cls._error_messages.update({
-                'list_price_error': 'You can not set the list price lesser '
-                    'than the cost price.',
+                'list_price_error': 'You can not set "%(product)s" '
+                    'the list price (%(list_price)s) lesser '
+                    'than the cost price (%(cost_price)s).',
                 })
 
     @classmethod
@@ -27,4 +28,8 @@ class Template:
     def validate_price(cls, records):
         for record in records:
             if record.list_price < record.cost_price:
-                cls.raise_user_error('list_price_error')
+                cls.raise_user_error('list_price_error', {
+                        'product': record.rec_name,
+                        'list_price': record.list_price,
+                        'cost_price': record.cost_price,
+                        })
