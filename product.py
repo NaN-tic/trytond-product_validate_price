@@ -1,7 +1,7 @@
 # The COPYRIGHT file at the top level of this repository contains the full
 # copyright notices and license terms.
 from trytond.pool import PoolMeta
-
+from trytond.transaction import Transaction
 
 __all__ = ['Template']
 __metaclass__ = PoolMeta
@@ -22,7 +22,8 @@ class Template:
     @classmethod
     def validate(cls, records):
         super(Template, cls).validate(records)
-        cls.validate_price(records)
+        if Transaction().context.get('validate_price', True):
+            cls.validate_price(records)
 
     @classmethod
     def validate_price(cls, records):
